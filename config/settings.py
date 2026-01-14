@@ -10,7 +10,7 @@ SECRET_KEY = 'django-insecure-o!9x^&eyd3)f+vqw7#j=c+4^$)#5(qk-wegbo_@^y01)s&0@z!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
@@ -97,3 +97,5 @@ CLOUDINARY_STORAGE = {
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
