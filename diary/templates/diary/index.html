@@ -105,47 +105,69 @@
     <div id="finale-page">
         <div class="birthday-msg">HAPPY BIRTHDAY<br><span style="font-size: 3rem; font-family: 'Pinyon Script';">My Eternal Queen</span></div>
     </div>
-
-    <script>
-        function verifyAndBreak() {
-            if (document.getElementById('seal-pass').value === "7:22") {
-                document.getElementById('break-sound').play();
-                document.getElementById('intro-overlay').style.opacity = '0';
-                setTimeout(() => { document.getElementById('intro-overlay').style.visibility = 'hidden'; }, 2000);
-            }
+<script>
+    // AUTO-REMOVE INTRO OVERLAY AFTER PAGE LOAD
+    window.onload = function () {
+        const intro = document.getElementById('intro-overlay');
+        if (intro) {
+            setTimeout(() => {
+                intro.style.display = 'none';
+            }, 300);
         }
+    };
 
-        function nextPage(num) {
-            const current = document.getElementById('page-' + num);
-            const next = document.getElementById('page-' + (num + 1));
-            
-            if (next && next.getAttribute('data-is-finale') === "True") {
-                triggerFinale(next.getAttribute('data-img'));
-            } else if (next) {
-                current.classList.add('flipped');
-                next.classList.add('active');
-                setTimeout(() => { current.style.display = 'none'; }, 1800);
-            }
+    function verifyAndBreak() {
+        const val = document.getElementById('seal-pass').value.trim();
+        if (val === "7:22") {
+            document.getElementById('break-sound').play();
+            const intro = document.getElementById('intro-overlay');
+            intro.style.opacity = '0';
+            setTimeout(() => {
+                intro.style.display = 'none';
+            }, 2000);
         }
+    }
 
-        function triggerFinale(imgUrl) {
-            const finale = document.getElementById('finale-page');
-            finale.style.backgroundImage = `url('${imgUrl}')`;
-            finale.style.display = 'flex';
-            setTimeout(() => { finale.style.opacity = '1'; createHearts(); }, 100);
-        }
+    function nextPage(num) {
+        const current = document.getElementById('page-' + num);
+        const next = document.getElementById('page-' + (num + 1));
 
-        function moveNoButton(btn) {
-            btn.style.transform = `translate(${(Math.random()*300)-150}px, ${(Math.random()*150)-75}px)`;
+        if (next && next.getAttribute('data-is-finale') === "True") {
+            triggerFinale(next.getAttribute('data-img'));
+        } else if (next) {
+            current.classList.add('flipped');
+            next.classList.add('active');
+            setTimeout(() => {
+                current.style.display = 'none';
+            }, 1800);
         }
+    }
 
-        function createHearts() {
-            setInterval(() => {
-                const h = document.createElement('div'); h.innerHTML = '❤️'; h.className = 'heart-particle';
-                h.style.left = Math.random() * 100 + 'vw'; document.body.appendChild(h);
-                setTimeout(() => h.remove(), 4000);
-            }, 200);
-        }
-    </script>
+    function triggerFinale(imgUrl) {
+        const finale = document.getElementById('finale-page');
+        finale.style.backgroundImage = `url('${imgUrl}')`;
+        finale.style.display = 'flex';
+        setTimeout(() => {
+            finale.style.opacity = '1';
+            createHearts();
+        }, 100);
+    }
+
+    function moveNoButton(btn) {
+        btn.style.transform = `translate(${(Math.random() * 300) - 150}px, ${(Math.random() * 150) - 75}px)`;
+    }
+
+    function createHearts() {
+        setInterval(() => {
+            const h = document.createElement('div');
+            h.innerHTML = '❤️';
+            h.className = 'heart-particle';
+            h.style.left = Math.random() * 100 + 'vw';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 4000);
+        }, 200);
+    }
+</script>
+
 </body>
 </html>
