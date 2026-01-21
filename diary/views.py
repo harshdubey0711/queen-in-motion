@@ -11,3 +11,20 @@ def diary_view(request):
         'intro': intro,
         'pages': pages
     })
+    
+
+
+from django.http import HttpResponse
+from django.contrib.auth.models import User
+
+def create_superuser_once(request):
+    if User.objects.filter(username="admin").exists():
+        return HttpResponse("Superuser already exists.")
+
+    User.objects.create_superuser(
+        username="admin",
+        email="admin@example.com",
+        password="Admin@123"
+    )
+
+    return HttpResponse("Superuser created successfully.")
