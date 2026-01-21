@@ -106,25 +106,23 @@
         <div class="birthday-msg">HAPPY BIRTHDAY<br><span style="font-size: 3rem; font-family: 'Pinyon Script';">My Eternal Queen</span></div>
     </div>
 <script>
-    // AUTO-REMOVE INTRO OVERLAY AFTER PAGE LOAD
-    window.onload = function () {
-        const intro = document.getElementById('intro-overlay');
-        if (intro) {
-            setTimeout(() => {
-                intro.style.display = 'none';
-            }, 300);
-        }
-    };
+    // DO NOT AUTO-HIDE THE INTRO
+    // The intro should ONLY disappear after correct password
 
     function verifyAndBreak() {
-        const val = document.getElementById('seal-pass').value.trim();
-        if (val === "7:22") {
+        const input = document.getElementById('seal-pass').value.trim();
+
+        if (input === "7:22") {
             document.getElementById('break-sound').play();
+
             const intro = document.getElementById('intro-overlay');
             intro.style.opacity = '0';
+
             setTimeout(() => {
                 intro.style.display = 'none';
             }, 2000);
+        } else {
+            alert("That is not the time of our beginning.");
         }
     }
 
@@ -137,6 +135,7 @@
         } else if (next) {
             current.classList.add('flipped');
             next.classList.add('active');
+
             setTimeout(() => {
                 current.style.display = 'none';
             }, 1800);
@@ -147,6 +146,7 @@
         const finale = document.getElementById('finale-page');
         finale.style.backgroundImage = `url('${imgUrl}')`;
         finale.style.display = 'flex';
+
         setTimeout(() => {
             finale.style.opacity = '1';
             createHearts();
@@ -164,10 +164,10 @@
             h.className = 'heart-particle';
             h.style.left = Math.random() * 100 + 'vw';
             document.body.appendChild(h);
+
             setTimeout(() => h.remove(), 4000);
         }, 200);
     }
 </script>
-
 </body>
 </html>
