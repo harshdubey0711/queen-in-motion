@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import diary_view, create_superuser_once
+from .views import diary_view
 
 urlpatterns = [
     path("", diary_view, name="home"),
